@@ -75,13 +75,13 @@
 // console.log(result);
 
 // #7
-const nums = [20, 54, 432, 65, 20, 757, 3, 65, 20];
-const uniqElements = [];
-let sum = 0;
-for (let i = 0; i < nums.length; i++) {
-  if (!uniqElements.includes(nums[i])) {
-    uniqElements.push(nums[i]);
-    sum += nums[i];
-  }
-}
-console.log(sum);
+// const nums = [20, 54, 432, 65, 20, 757, 3, 65, 20];
+// const uniqElements = [];
+// let sum = 0;
+// for (let i = 0; i < nums.length; i++) {
+//   if (!uniqElements.includes(nums[i])) {
+//     uniqElements.push(nums[i]);
+//     sum += nums[i];
+//   }
+// }
+// console.log(sum);
