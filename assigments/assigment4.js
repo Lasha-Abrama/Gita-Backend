@@ -49,9 +49,10 @@ const grouped = grades.reduce((prev, curr) => {
   }
   return prev;
 }, {});
+// console.log(grouped);
 // გამოვიყენე entries და fromEntries ობიექტებთან სამუშაოდ საბოლოო პასუხის მისაღებად.
 const avgByClass = Object.fromEntries(
   Object.entries(grouped).map(([key, value]) => [key, value.sum / value.count])
 );
 
-console.log(avgByClass);
+// console.log(avgByClass);
