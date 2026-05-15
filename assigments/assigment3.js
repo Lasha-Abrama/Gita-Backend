@@ -70,6 +70,12 @@ function palindromWords(arr) {
 }
 // console.log(palindromWords(["mom", "car", "level", "dog"]));
 
+// with filter
+function palindromWords(arr) {
+  return arr.filter((word) => word === word.split("").reverse().join(""));
+}
+// console.log(palindromWords(["mom", "car", "level", "dog"]));
+
 // 6)დაწერეთ ფუნცქია რომელიც მიიღებს რიცხვების მასივს და დააბრუნებთ რომელია ყველაზე ხშირად გამეორებადი რიცხვი მაგ: [4, 5, 6, 5, 4, 5] => 5
 function mostRepeatedNum(arr) {
   let maxCount = 0;
