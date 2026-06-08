@@ -1,0 +1,5 @@
+[
+  { "carName": "Ferrari", "carReleaseDate": "2020", "carColor": "red" },
+  { "carName": "BMW", "carReleaseDate": "2021", "carColor": "black" },
+  { "carName": "Mercedes", "carReleaseDate": "2020", "carColor": "white" }
+]
