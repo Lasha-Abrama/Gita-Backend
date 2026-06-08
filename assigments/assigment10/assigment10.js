@@ -47,28 +47,28 @@
 
 // 4) შექმენით ფაილი random.txt შიგნით დაწერეთ რაიმე წინადადება თქვენი მიზანია დაითვალოთ რამდენი სიტყვა, რამდენი ხმოვანი და რამდენი ასოა ამ ფაილში და ჩაწეროთ შედეგი result.json ში შემდეგი სახით  {word: 20, vowel: 64, chars: 152}
 
-const fs = require("fs/promises");
+// const fs = require("fs/promises");
 
-async function fileInfo(fileName) {
-  try {
-    const readData = await fs.readFile(fileName, "utf-8");
+// async function fileInfo(fileName) {
+//   try {
+//     const readData = await fs.readFile(fileName, "utf-8");
 
-    const words = readData.trim().split(/\s+/);
+//     const words = readData.trim().split(/\s+/);
 
-    const chars = readData.replace(/\s/g, "");
+//     const chars = readData.replace(/\s/g, "");
 
-    const matches = chars.match(/[aeiou]/gi);
+//     const matches = chars.match(/[aeiou]/gi);
 
-    const vowels = matches ? matches.length : 0;
+//     const vowels = matches ? matches.length : 0;
 
-    console.log({
-      words: words.length,
-      chars: chars.length,
-      vowels: vowels,
-    });
-  } catch (e) {
-    console.log("File name is unknown");
-  }
-}
+//     console.log({
+//       words: words.length,
+//       chars: chars.length,
+//       vowels: vowels,
+//     });
+//   } catch (e) {
+//     console.log("File name is unknown");
+//   }
+// }
 
 // fileInfo(process.argv[2]);
