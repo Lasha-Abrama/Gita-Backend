@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "Lionel Messi",
+    "country": "Argentina",
+    "position": "Forward",
+    "club": "Inter Miami",
+    "age": 38
+  },
+  {
+    "id": 2,
+    "name": "Cristiano Ronaldo",
+    "country": "Portugal",
+    "position": "Forward",
+    "club": "Al Nassr",
+    "age": 41
+  },
+  {
+    "id": 3,
+    "name": "Kylian Mbappe",
+    "country": "France",
+    "position": "Forward",
+    "club": "Real Madrid",
+    "age": 27
+  },
+  {
+    "id": 4,
+    "name": "Erling Haaland",
+    "country": "Norway",
+    "position": "Forward",
+    "club": "Manchester City",
+    "age": 26
+  },
+  {
+    "id": 6,
+    "name": "Khvicha Kvaratskhelia",
+    "country": "Georgia",
+    "position": "Attacker",
+    "club": "PSG",
+    "age": 28
+  },
+  {
+    "id": 7,
+    "name": "Joshua Kimmich",
+    "country": "Germany",
+    "position": "Midfielder",
+    "club": "Bayern Munich",
+    "age": 34
+  },
+  {
+    "id": 8,
+    "name": "Lamine Yamal",
+    "country": "Spain",
+    "position": "Winger",
+    "club": "Barcelona",
+    "age": 23
+  }
+]
