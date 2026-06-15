@@ -1,0 +1,23 @@
+{
+  "name": "assigment12",
+  "version": "1.0.0",
+  "description": "",
+  "main": "assigment12.js",
+  "bin": {
+    "todo-cli": "todo.js",
+    "weather-cli": "./weather.js"
+  },
+  "scripts": {
+    "start-todo": "node --watch todo.js",
+    "start-weather": "node --watch weather.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "commander": "^15.0.0"
+  }
+}
