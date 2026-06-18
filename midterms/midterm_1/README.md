@@ -26,10 +26,10 @@ The goal of this project is to build a real-world CLI tool for managing personal
 
 # Technologies Used
 
-* Node.js
-* Commander.js
-* Chalk
-* File System (fs)
+- Node.js
+- Commander.js
+- Chalk
+- File System (fs)
 
 ---
 
@@ -109,6 +109,7 @@ After linking globally:
 ```bash
 expense-cli --help
 ```
+
 ---
 
 # Available Commands
@@ -131,9 +132,9 @@ expense-cli add shopping 50 GEL
 
 ### Validation
 
-* Price must be a number
-* Price must be at least 10
-* Currency must be one of:
+- Price must be a number
+- Price must be at least 10
+- Currency must be one of:
 
 ```text
 GEL
@@ -396,18 +397,18 @@ The application includes input validation and error handling for:
 
 ✅ CRUD Operations
 
-* Create
-* Read
-* Update
-* Delete
-* Get By ID
+- Create
+- Read
+- Update
+- Delete
+- Get By ID
 
 ✅ Required Expense Fields
 
-* id
-* category
-* price
-* createdAt
+- id
+- category
+- price
+- createdAt
 
 ✅ Automatic ID Generation
 
@@ -415,8 +416,8 @@ The application includes input validation and error handling for:
 
 ✅ Sorting
 
-* Ascending
-* Descending
+- Ascending
+- Descending
 
 ✅ Category Filtering
 
@@ -424,7 +425,7 @@ The application includes input validation and error handling for:
 
 ✅ Validation
 
-* Minimum price validation
+- Minimum price validation
 
 ✅ Pagination
 
@@ -438,4 +439,4 @@ Midterm Project – Expense CLI
 Built with Node.js, Commander.js, and File System module.
 
 - GitHub: https://github.com/Lasha-Abrama
-- CLI Package (npm): *Not published yet*
+- CLI Package (npm): _Not published yet_
