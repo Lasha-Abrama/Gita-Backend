@@ -1,0 +1,21 @@
+{
+  "name": "expense-cli",
+  "version": "1.0.0",
+  "description": "Midterm 1",
+  "license": "ISC",
+  "author": "Lasha Abramishvili",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "expense-cli": "main.js"
+  },
+  "scripts": {
+    "start": "node --watch main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "commander": "^15.0.0",
+    "tree-path-cli": "^1.0.0"
+  }
+}
