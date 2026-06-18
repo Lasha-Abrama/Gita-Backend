@@ -6,6 +6,20 @@ A CLI-based expense management system built with Node.js, Commander.js, and the 
 
 The goal of this project is to build a real-world CLI tool for managing personal expenses using Node.js, practicing CRUD operations, file-based storage, and command-line interface design.
 
+## Installation
+
+### Install via NPM (Recommended)
+
+```bash
+npm install -g expense-cli
+```
+## Quick Start
+
+```bash
+npm install -g expense-cli
+expense-cli --help
+```
+
 ## Features
 
 - Create new expenses
@@ -76,7 +90,7 @@ Additional field:
 
 ---
 
-# Installation
+## Development Setup (From Source)
 
 Clone the repository:
 
@@ -439,4 +453,4 @@ Midterm Project – Expense CLI
 Built with Node.js, Commander.js, and File System module.
 
 - GitHub: https://github.com/Lasha-Abrama
-- CLI Package (npm): _Not published yet_
+- CLI Package (npm): https://www.npmjs.com/package/expense-cli
