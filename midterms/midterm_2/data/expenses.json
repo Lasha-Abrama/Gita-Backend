@@ -1,0 +1,149 @@
+[
+  {
+    "id": 1,
+    "category": "Food",
+    "amount": 42,
+    "description": "Lunch and coffee",
+    "createdAt": "2026-07-01T09:20:00.000Z"
+  },
+  {
+    "id": 2,
+    "category": "Transport",
+    "amount": 18,
+    "description": "Metro card top-up",
+    "createdAt": "2026-07-01T12:45:00.000Z"
+  },
+  {
+    "id": 3,
+    "category": "Shopping",
+    "amount": 150,
+    "description": "New shirt and socks",
+    "createdAt": "2026-07-02T15:10:00.000Z"
+  },
+  {
+    "id": 4,
+    "category": "Bills",
+    "amount": 96,
+    "description": "Internet payment",
+    "createdAt": "2026-07-02T18:30:00.000Z"
+  },
+  {
+    "id": 5,
+    "category": "Entertainment",
+    "amount": 55,
+    "description": "Cinema tickets",
+    "createdAt": "2026-07-03T19:00:00.000Z"
+  },
+  {
+    "id": 6,
+    "category": "Food",
+    "amount": 33,
+    "description": "Groceries for breakfast",
+    "createdAt": "2026-07-04T08:40:00.000Z"
+  },
+  {
+    "id": 7,
+    "category": "Health",
+    "amount": 64,
+    "description": "Pharmacy items",
+    "createdAt": "2026-07-04T11:25:00.000Z"
+  },
+  {
+    "id": 8,
+    "category": "Education",
+    "amount": 80,
+    "description": "Backend course materials",
+    "createdAt": "2026-07-04T14:00:00.000Z"
+  },
+  {
+    "id": 9,
+    "category": "Transport",
+    "amount": 27,
+    "description": "Taxi ride",
+    "createdAt": "2026-07-05T01:15:00.000Z"
+  },
+  {
+    "id": 10,
+    "category": "Bills",
+    "amount": 120,
+    "description": "Electricity bill",
+    "createdAt": "2026-07-05T10:10:00.000Z"
+  },
+  {
+    "id": 11,
+    "category": "Shopping",
+    "amount": 210,
+    "description": "Sneakers",
+    "createdAt": "2026-07-05T16:35:00.000Z"
+  },
+  {
+    "id": 12,
+    "category": "Food",
+    "amount": 48,
+    "description": "Dinner with friends",
+    "createdAt": "2026-07-05T20:20:00.000Z"
+  },
+  {
+    "id": 13,
+    "category": "Subscriptions",
+    "amount": 24,
+    "description": "Music subscription",
+    "createdAt": "2026-07-06T07:50:00.000Z"
+  },
+  {
+    "id": 14,
+    "category": "Home",
+    "amount": 73,
+    "description": "Cleaning supplies",
+    "createdAt": "2026-07-06T13:30:00.000Z"
+  },
+  {
+    "id": 15,
+    "category": "Entertainment",
+    "amount": 38,
+    "description": "Board game night snacks",
+    "createdAt": "2026-07-06T18:05:00.000Z"
+  },
+  {
+    "id": 16,
+    "category": "Health",
+    "amount": 110,
+    "description": "Doctor visit",
+    "createdAt": "2026-07-06T21:15:00.000Z"
+  },
+  {
+    "id": 17,
+    "category": "Travel",
+    "amount": 260,
+    "description": "Weekend trip booking",
+    "createdAt": "2026-07-07T09:35:00.000Z"
+  },
+  {
+    "id": 18,
+    "category": "Food",
+    "amount": 29,
+    "description": "Bakery and juice",
+    "createdAt": "2026-07-07T10:05:00.000Z"
+  },
+  {
+    "id": 19,
+    "category": "Transport",
+    "amount": 15,
+    "description": "Bus pass",
+    "createdAt": "2026-07-07T11:20:00.000Z"
+  },
+  {
+    "id": 20,
+    "category": "Personal",
+    "amount": 67,
+    "description": "Haircut",
+    "createdAt": "2026-07-07T12:45:00.000Z"
+  },
+  {
+    "id": 21,
+    "category": "Fuel",
+    "amount": 35,
+    "description": "fuel for vacation",
+    "createdAt": "2026-07-07T18:22:38.127Z"
+  }
+]

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Expenses</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <%- include("../partials/header") %>
+    <% const selectedSort = typeof sort !== "undefined" ? sort : ""; %>
+    <% const selectedCategory = typeof category !== "undefined" ? category : ""; %>
+
+    <main>
+      <section class="page-heading">
+        <div>
+          <span class="eyebrow">Dashboard</span>
+          <h2>All Expenses</h2>
+        </div>
+        <a class="btn" href="/expenses/create">Create Expense</a>
+      </section>
+
+      <form action="/" method="GET" class="search-form">
+        <input
+          id="category-search"
+          type="text"
+          name="category"
+          placeholder="Search by category"
+          value="<%= selectedCategory %>"
+          autocomplete="off"
+        />
+
+        <select id="sort-filter" name="sort">
+          <option value="" <%= selectedSort === "" ? "selected" : "" %>>Filter</option>
+          <option value="a-z" <%= selectedSort === "a-z" ? "selected" : "" %>>A-Z</option>
+          <option value="z-a" <%= selectedSort === "z-a" ? "selected" : "" %>>Z-A</option>
+          <option value="latest" <%= selectedSort === "latest" ? "selected" : "" %>>Latest</option>
+          <option value="oldest" <%= selectedSort === "oldest" ? "selected" : "" %>>Oldest</option>
+          <option value="smallest" <%= selectedSort === "smallest" ? "selected" : "" %>>Smallest</option>
+          <option value="biggest" <%= selectedSort === "biggest" ? "selected" : "" %>>Biggest</option>
+        </select>
+
+        <button type="submit">Search</button>
+      </form>
+
+      <div id="expenses-list" class="expenses">
+        <% if (expenses.length === 0) { %>
+          <p class="empty-state">No expenses found.</p>
+        <% } %>
+
+        <% expenses.forEach(expense => { %>
+          <div class="card">
+            <div class="card-header">
+              <h3><%= expense.category %></h3>
+              <span class="amount"><%= expense.amount %> GEL</span>
+            </div>
+
+            <p><%= expense.description %></p>
+
+            <div class="actions">
+              <a class="btn btn-secondary" href="/expenses/<%= expense.id %>">Details</a>
+              <a class="btn btn-warning" href="/expenses/<%= expense.id %>/edit">Edit</a>
+
+              <form action="/expenses/<%= expense.id %>/delete" method="POST">
+                <button class="btn-danger" type="submit">Delete</button>
+              </form>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </main>
+
+    <%- include("../partials/footer") %>
+    <script src="/js/app.js"></script>
+  </body>
+</html>

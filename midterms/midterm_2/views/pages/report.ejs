@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expenses Report</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <%- include("../partials/header") %>
+
+    <main>
+      <section class="page-heading">
+        <div>
+          <span class="eyebrow">Overview</span>
+          <h2>Expenses Report</h2>
+        </div>
+      </section>
+
+      <section class="summary">
+        <div class="card">
+          <h3>Total Expenses</h3>
+          <p><%= report.totalCount %></p>
+        </div>
+
+        <div class="card">
+          <h3>Total Amount</h3>
+          <p><%= report.totalAmount %> GEL</p>
+        </div>
+      </section>
+
+      <h3>By Category</h3>
+
+      <div class="expenses">
+        <% if (report.categories.length === 0) { %>
+          <p>No expenses yet.</p>
+        <% } %>
+
+        <% report.categories.forEach(item => { %>
+          <div class="card">
+            <h3><%= item.category %></h3>
+            <p>Count: <%= item.count %></p>
+            <p>Total: <%= item.total %> GEL</p>
+          </div>
+        <% }) %>
+      </div>
+    </main>
+
+    <%- include("../partials/footer") %>
+  </body>
+</html>
