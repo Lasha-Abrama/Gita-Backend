@@ -13,7 +13,8 @@ export class AuthService {
 
   async signUp(createUserDto: CreateUserDto) {
     const user = await this.usersService.createUser(createUserDto);
-    const { password: _password, ...userObject } = user.toObject();
+    const userObject = user.toObject();
+    Reflect.deleteProperty(userObject, 'password');
 
     return userObject;
   }

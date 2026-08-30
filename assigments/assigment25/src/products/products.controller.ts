@@ -14,8 +14,10 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { SubscriptionGuard } from '../guards/has-email-and-active-sub.guard';
 import { IsValidObjectId } from '../common/dtos/is-valid-object-id.dto';
+import { IsAuthGuard } from '../guards/is-auth.guard';
 
 @Controller('products')
+@UseGuards(IsAuthGuard)
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 

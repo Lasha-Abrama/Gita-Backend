@@ -1,7 +1,6 @@
 import {
   IsIn,
   IsInt,
-  IsMongoId,
   IsNotEmpty,
   IsNumber,
   IsString,
@@ -26,7 +25,4 @@ export class CreateExpenseDto {
   @IsInt()
   @Min(1)
   quantity!: number;
-
-  @IsMongoId()
-  owner!: string;
 }

@@ -7,15 +7,18 @@ import {
   Patch,
   Post,
   Query,
+  Req,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
-import { UpgradeSubscriptionDto } from './dtos/upgrade-subscription.dto';
 import { UsersQueryDto } from './dtos/user-query.dto';
 import { UsersService } from './users.service';
 import { IsValidObjectId } from '../common/dtos/is-valid-object-id.dto';
+import { IsAuthGuard } from '../guards/is-auth.guard';
 
 @Controller('users')
+@UseGuards(IsAuthGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -30,8 +33,8 @@ export class UsersController {
   }
 
   @Patch('upgrade-subscription')
-  upgradeSubscription(@Body() { email }: UpgradeSubscriptionDto) {
-    return this.usersService.upgradeSubscription(email);
+  upgradeSubscription(@Req() request: { userId: string }) {
+    return this.usersService.upgradeSubscription(request.userId);
   }
 
   @Get(':id')
@@ -43,12 +46,13 @@ export class UsersController {
   update(
     @Param() { id }: IsValidObjectId,
     @Body() updateUserDto: UpdateUserDto,
+    @Req() request: { userId: string },
   ) {
-    return this.usersService.updateUserById(id, updateUserDto);
+    return this.usersService.updateUserById(id, updateUserDto, request.userId);
   }
 
   @Delete(':id')
-  remove(@Param() { id }: IsValidObjectId) {
-    return this.usersService.deleteUserById(id);
+  remove(@Param() { id }: IsValidObjectId, @Req() request: { userId: string }) {
+    return this.usersService.deleteUserById(id, request.userId);
   }
 }

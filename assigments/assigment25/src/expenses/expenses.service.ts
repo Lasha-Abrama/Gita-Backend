@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ForbiddenException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -66,38 +67,38 @@ export class ExpensesService {
     return expense;
   }
 
-  async create(createExpenseDto: CreateExpenseDto) {
-    await this.usersService.getUserById(createExpenseDto.owner);
+  async create(createExpenseDto: CreateExpenseDto, ownerId: string) {
+    await this.usersService.getUserById(ownerId);
 
     const expense = await this.expenseModel.create({
       ...createExpenseDto,
-      owner: new mongoose.Types.ObjectId(createExpenseDto.owner),
+      owner: new mongoose.Types.ObjectId(ownerId),
       totalPrice: createExpenseDto.price * createExpenseDto.quantity,
     });
 
-    await this.usersService.addExpenseToUser(
-      createExpenseDto.owner,
-      expense._id.toString(),
-    );
+    await this.usersService.addExpenseToUser(ownerId, expense._id.toString());
 
     return expense;
   }
 
-  async update(id: string, updateExpenseDto: UpdateExpenseDto) {
+  async update(
+    id: string,
+    updateExpenseDto: UpdateExpenseDto,
+    currentUserId: string,
+  ) {
     const oldExpense = await this.findOne(id);
+    if (oldExpense.owner.toString() !== currentUserId) {
+      throw new ForbiddenException('You can only update your own expenses');
+    }
+
     const price = updateExpenseDto.price ?? oldExpense.price;
     const quantity = updateExpenseDto.quantity ?? oldExpense.quantity;
-    const owner = updateExpenseDto.owner ?? oldExpense.owner.toString();
-
-    if (owner !== oldExpense.owner.toString()) {
-      await this.usersService.getUserById(owner);
-    }
 
     const expense = await this.expenseModel.findByIdAndUpdate(
       id,
       {
         ...updateExpenseDto,
-        owner: new mongoose.Types.ObjectId(owner),
+        owner: oldExpense.owner,
         totalPrice: price * quantity,
       },
       { new: true },
@@ -107,23 +108,16 @@ export class ExpensesService {
       throw new NotFoundException('Expense not found');
     }
 
-    if (owner !== oldExpense.owner.toString()) {
-      await this.usersService.removeExpenseFromUser(
-        oldExpense.owner.toString(),
-        id,
-      );
-      await this.usersService.addExpenseToUser(owner, id);
-    }
-
     return expense;
   }
 
-  async remove(id: string) {
-    const expense = await this.expenseModel.findByIdAndDelete(id);
-
-    if (!expense) {
-      throw new NotFoundException('Expense not found');
+  async remove(id: string, currentUserId: string) {
+    const expense = await this.findOne(id);
+    if (expense.owner.toString() !== currentUserId) {
+      throw new ForbiddenException('You can only delete your own expenses');
     }
+
+    await this.expenseModel.findByIdAndDelete(id);
 
     await this.usersService.removeExpenseFromUser(expense.owner.toString(), id);
 

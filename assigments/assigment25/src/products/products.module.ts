@@ -5,6 +5,7 @@ import { UsersModule } from '../users/users.module';
 import { SubscriptionGuard } from '../guards/has-email-and-active-sub.guard';
 import { MongooseModule } from '@nestjs/mongoose';
 import { productSchema } from './schema/product.schema';
+import { IsAuthGuard } from '../guards/is-auth.guard';
 
 @Module({
   imports: [
@@ -12,6 +13,6 @@ import { productSchema } from './schema/product.schema';
     UsersModule,
   ],
   controllers: [ProductsController],
-  providers: [ProductsService, SubscriptionGuard],
+  providers: [ProductsService, SubscriptionGuard, IsAuthGuard],
 })
 export class ProductsModule {}

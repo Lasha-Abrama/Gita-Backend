@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ForbiddenException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -7,18 +8,14 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { UsersQueryDto } from './dtos/user-query.dto';
 import { InjectModel } from '@nestjs/mongoose';
-import mongoose, { Model } from 'mongoose';
+import { Model } from 'mongoose';
 import { User } from './schema/user.schema';
 import { UserGender } from './enums/user-gender.enum';
-import { Expense } from '../expenses/schema/expense.schema';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
-  constructor(
-    @InjectModel('user') private userModel: Model<User>,
-    @InjectModel('expense') private expenseModel: Model<Expense>,
-  ) {}
+  constructor(@InjectModel('user') private userModel: Model<User>) {}
 
   async getUsers({ page, take, gender, email }: UsersQueryDto) {
     const filter: { email?: string; gender?: UserGender } = {};
@@ -52,10 +49,6 @@ export class UsersService {
       throw new NotFoundException('User not found');
     }
 
-    await this.expenseModel.deleteMany({
-      owner: new mongoose.Types.ObjectId(userId),
-    });
-
     return user;
   }
 
@@ -87,7 +80,11 @@ export class UsersService {
     });
   }
 
-  async deleteUserById(userId: string) {
+  async deleteUserById(userId: string, currentUserId: string) {
+    if (userId !== currentUserId) {
+      throw new ForbiddenException('You can only delete your own account');
+    }
+
     const user = await this.userModel.findByIdAndDelete(userId);
 
     if (!user) {
@@ -97,8 +94,8 @@ export class UsersService {
     return user;
   }
 
-  async upgradeSubscription(email: string) {
-    const user = await this.getUserByEmail(email);
+  async upgradeSubscription(userId: string) {
+    const user = await this.userModel.findById(userId);
 
     if (!user) {
       throw new NotFoundException('User not found');
@@ -116,8 +113,21 @@ export class UsersService {
     };
   }
 
-  async updateUserById(userId: string, updateUserDto: UpdateUserDto) {
-    const user = await this.userModel.findByIdAndUpdate(userId, updateUserDto, {
+  async updateUserById(
+    userId: string,
+    updateUserDto: UpdateUserDto,
+    currentUserId: string,
+  ) {
+    if (userId !== currentUserId) {
+      throw new ForbiddenException('You can only update your own account');
+    }
+
+    const updateData = { ...updateUserDto };
+    if (updateData.password) {
+      updateData.password = await bcrypt.hash(updateData.password, 10);
+    }
+
+    const user = await this.userModel.findByIdAndUpdate(userId, updateData, {
       new: true,
     });
 
