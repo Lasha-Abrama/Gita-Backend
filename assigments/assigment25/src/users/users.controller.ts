@@ -16,6 +16,7 @@ import { UsersQueryDto } from './dtos/user-query.dto';
 import { UsersService } from './users.service';
 import { IsValidObjectId } from '../common/dtos/is-valid-object-id.dto';
 import { IsAuthGuard } from '../guards/is-auth.guard';
+import { WriteThrottle } from '../common/decorators/write-throttle.decorator';
 
 @Controller('users')
 @UseGuards(IsAuthGuard)
@@ -23,6 +24,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
+  @WriteThrottle()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.createUser(createUserDto);
   }
@@ -33,6 +35,7 @@ export class UsersController {
   }
 
   @Patch('upgrade-subscription')
+  @WriteThrottle()
   upgradeSubscription(@Req() request: { userId: string }) {
     return this.usersService.upgradeSubscription(request.userId);
   }
@@ -43,6 +46,7 @@ export class UsersController {
   }
 
   @Patch(':id')
+  @WriteThrottle()
   update(
     @Param() { id }: IsValidObjectId,
     @Body() updateUserDto: UpdateUserDto,
@@ -52,6 +56,7 @@ export class UsersController {
   }
 
   @Delete(':id')
+  @WriteThrottle()
   remove(@Param() { id }: IsValidObjectId, @Req() request: { userId: string }) {
     return this.usersService.deleteUserById(id, request.userId);
   }

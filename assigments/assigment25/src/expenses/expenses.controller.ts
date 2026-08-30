@@ -16,6 +16,7 @@ import { UpdateExpenseDto } from './dtos/update-expense.dto';
 import { ExpensesService } from './expenses.service';
 import { IsValidObjectId } from '../common/dtos/is-valid-object-id.dto';
 import { IsAuthGuard } from '../guards/is-auth.guard';
+import { WriteThrottle } from '../common/decorators/write-throttle.decorator';
 
 @Controller('expenses')
 @UseGuards(IsAuthGuard)
@@ -23,6 +24,7 @@ export class ExpensesController {
   constructor(private readonly expensesService: ExpensesService) {}
 
   @Post()
+  @WriteThrottle()
   create(
     @Body() createExpenseDto: CreateExpenseDto,
     @Req() request: { userId: string },
@@ -41,6 +43,7 @@ export class ExpensesController {
   }
 
   @Patch(':id')
+  @WriteThrottle()
   update(
     @Param() { id }: IsValidObjectId,
     @Body() updateExpenseDto: UpdateExpenseDto,
@@ -50,6 +53,7 @@ export class ExpensesController {
   }
 
   @Delete(':id')
+  @WriteThrottle()
   remove(@Param() { id }: IsValidObjectId, @Req() request: { userId: string }) {
     return this.expensesService.remove(id, request.userId);
   }

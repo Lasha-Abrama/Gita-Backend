@@ -15,6 +15,7 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { SubscriptionGuard } from '../guards/has-email-and-active-sub.guard';
 import { IsValidObjectId } from '../common/dtos/is-valid-object-id.dto';
 import { IsAuthGuard } from '../guards/is-auth.guard';
+import { WriteThrottle } from '../common/decorators/write-throttle.decorator';
 
 @Controller('products')
 @UseGuards(IsAuthGuard)
@@ -22,6 +23,7 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
+  @WriteThrottle()
   create(@Body() createProductDto: CreateProductDto) {
     return this.productsService.create(createProductDto);
   }
@@ -38,6 +40,7 @@ export class ProductsController {
   }
 
   @Patch(':id')
+  @WriteThrottle()
   update(
     @Param() { id }: IsValidObjectId,
     @Body() updateProductDto: UpdateProductDto,
@@ -46,6 +49,7 @@ export class ProductsController {
   }
 
   @Delete(':id')
+  @WriteThrottle()
   remove(@Param() { id }: IsValidObjectId) {
     return this.productsService.remove(id);
   }
