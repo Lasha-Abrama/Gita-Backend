@@ -67,6 +67,57 @@ export class ExpensesService {
     return expense;
   }
 
+  getStatistics() {
+    return this.expenseModel.aggregate<{
+      category: string;
+      total: number;
+      count: number;
+      expenses: Expense[];
+    }>([
+      {
+        $group: {
+          _id: '$category',
+          total: { $sum: '$totalPrice' },
+          count: { $sum: 1 },
+          expenses: { $push: '$$ROOT' },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          category: '$_id',
+          total: 1,
+          count: 1,
+          expenses: 1,
+        },
+      },
+      { $sort: { category: 1 } },
+    ]);
+  }
+
+  getTopSpenders(limit: number) {
+    return this.expenseModel.aggregate<{
+      userId: mongoose.Types.ObjectId;
+      totalSpent: number;
+    }>([
+      {
+        $group: {
+          _id: '$owner',
+          totalSpent: { $sum: '$totalPrice' },
+        },
+      },
+      { $sort: { totalSpent: -1 } },
+      { $limit: limit },
+      {
+        $project: {
+          _id: 0,
+          userId: '$_id',
+          totalSpent: 1,
+        },
+      },
+    ]);
+  }
+
   async create(createExpenseDto: CreateExpenseDto, ownerId: string) {
     await this.usersService.getUserById(ownerId);
 

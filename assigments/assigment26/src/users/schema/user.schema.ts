@@ -48,6 +48,16 @@ export class User {
   })
   gender!: UserGender;
 
+  @Prop({ type: Number })
+  age?: number;
+
+  @Prop({
+    type: Boolean,
+    required: true,
+    default: true,
+  })
+  isActive!: boolean;
+
   @Prop({
     type: Date,
     required: true,

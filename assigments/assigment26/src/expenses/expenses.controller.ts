@@ -17,6 +17,7 @@ import { ExpensesService } from './expenses.service';
 import { IsValidObjectId } from '../common/dtos/is-valid-object-id.dto';
 import { IsAuthGuard } from '../guards/is-auth.guard';
 import { WriteThrottle } from '../common/decorators/write-throttle.decorator';
+import { TopSpendersQueryDto } from './dtos/top-spenders-query.dto';
 
 @Controller('expenses')
 @UseGuards(IsAuthGuard)
@@ -35,6 +36,16 @@ export class ExpensesController {
   @Get()
   findAll(@Query() queryDto: ExpensesQueryDto) {
     return this.expensesService.findAll(queryDto);
+  }
+
+  @Get('statistic')
+  getStatistics() {
+    return this.expensesService.getStatistics();
+  }
+
+  @Get('top-spenders')
+  getTopSpenders(@Query() { limit }: TopSpendersQueryDto) {
+    return this.expensesService.getTopSpenders(limit);
   }
 
   @Get(':id')

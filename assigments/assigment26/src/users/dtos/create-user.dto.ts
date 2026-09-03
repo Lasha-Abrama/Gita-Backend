@@ -1,9 +1,12 @@
 import {
   IsEmail,
   IsEnum,
+  IsInt,
   IsNotEmpty,
+  IsOptional,
   IsString,
   Matches,
+  Min,
   MinLength,
 } from 'class-validator';
 import { UserGender } from '../enums/user-gender.enum';
@@ -33,4 +36,9 @@ export class CreateUserDto {
 
   @IsEnum(UserGender)
   gender!: UserGender;
+
+  @IsOptional()
+  @IsInt()
+  @Min(0)
+  age?: number;
 }

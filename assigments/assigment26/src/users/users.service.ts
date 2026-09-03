@@ -77,7 +77,30 @@ export class UsersService {
       email,
       subscriptionStartDate,
       subscriptionEndDate,
+      isActive: true,
     });
+  }
+
+  async getStatistics() {
+    return this.userModel.aggregate<{
+      gender: UserGender;
+      averageAge: number | null;
+    }>([
+      {
+        $group: {
+          _id: '$gender',
+          averageAge: { $avg: '$age' },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          gender: '$_id',
+          averageAge: { $ifNull: ['$averageAge', null] },
+        },
+      },
+      { $sort: { gender: 1 } },
+    ]);
   }
 
   async deleteUserById(userId: string, currentUserId: string) {

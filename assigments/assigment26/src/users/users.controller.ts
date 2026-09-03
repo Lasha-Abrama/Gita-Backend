@@ -34,6 +34,11 @@ export class UsersController {
     return this.usersService.getUsers(queryDto);
   }
 
+  @Get('statistic')
+  getStatistics() {
+    return this.usersService.getStatistics();
+  }
+
   @Patch('upgrade-subscription')
   @WriteThrottle()
   upgradeSubscription(@Req() request: { userId: string }) {
