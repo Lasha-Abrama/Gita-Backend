@@ -1,5 +1,5 @@
 {
-  "name": "assigment28",
+  "name": "assigment29",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -69,10 +69,21 @@
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
+    "moduleNameMapper": {
+      "^@nestjs/typeorm$": "<rootDir>/test-helpers/nest-typeorm.mock.ts"
+    },
     "collectCoverageFrom": [
-      "**/*.(t|j)s"
+      "**/*.service.ts"
     ],
     "coverageDirectory": "../coverage",
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    },
     "testEnvironment": "node"
   }
 }
