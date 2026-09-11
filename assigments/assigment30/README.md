@@ -20,6 +20,10 @@ NestJS, MySQL, TypeORM, validation, pagination, and filtering.
 
 `DB_SYNCHRONIZE=true` makes TypeORM create the `directors` and `movies` tables automatically during development.
 
+## Swagger documentation
+
+After starting the application, open [http://localhost:3000/api](http://localhost:3000/api) for the interactive Swagger UI. The OpenAPI contract is maintained in YAML at `src/swagger/swagger.yaml` and served at [http://localhost:3000/swagger/swagger.yaml](http://localhost:3000/swagger/swagger.yaml).
+
 ## Endpoints
 
 ### Directors
