@@ -1,6 +1,7 @@
-# Assignment 30 — Movies, Directors, S3, and CloudFront API
+# Assignment 32 — Authentication, OTP, and Email
 
-NestJS, MySQL, TypeORM, validation, pagination, and filtering.
+The previous Movies/Directors API extended with TypeORM users, JWT authentication,
+email verification by OTP, and transactional emails through Nodemailer.
 
 ## Setup
 
@@ -12,13 +13,42 @@ NestJS, MySQL, TypeORM, validation, pagination, and filtering.
 
 2. Copy `.env.example` to `.env` and replace `DB_PASSWORD` with your MySQL password. If your MySQL user or database has a different name, update the relevant fields too.
 3. Configure AWS credentials, bucket name, region, and `AWS_CLOUDFRONT_DOMAIN` in `.env`. The S3 bucket should remain private and be accessible through the CloudFront origin access control.
-4. Start the project:
+4. Configure `JWT_SECRET` and the `EMAIL_*` SMTP settings. For Gmail, use an App Password in `EMAIL_PASS`, not the regular Google password.
+5. Start the project:
 
    ```bash
    npm run start:dev
    ```
 
-`DB_SYNCHRONIZE=true` makes TypeORM create the `directors` and `movies` tables automatically during development.
+`DB_SYNCHRONIZE=true` makes TypeORM create the `directors`, `movies`, and `users` tables automatically during development.
+
+## Authentication and email flow
+
+- `POST /auth/sign-up` creates an unverified user and emails a six-digit OTP. The OTP expires after five minutes and only its SHA-256 hash is stored.
+- `POST /auth/verify` verifies the OTP, returns a one-hour JWT, and sends the Welcome email.
+- `POST /auth/resend-verification` sends a new OTP after the previous code has expired.
+- `POST /auth/sign-in` returns a one-hour JWT for an active, verified user.
+- `GET /users/me` returns the authenticated user. Send the token as `Authorization: Bearer <token>`.
+- `DELETE /users/me` soft-deactivates the authenticated account and sends a deactivation email.
+
+Example sign-up body:
+
+```json
+{
+  "email": "user@example.com",
+  "fullName": "Test User",
+  "password": "password123"
+}
+```
+
+Example verification body:
+
+```json
+{
+  "email": "user@example.com",
+  "otpCode": "123456"
+}
+```
 
 ## Swagger documentation
 

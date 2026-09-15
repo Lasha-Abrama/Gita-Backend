@@ -15,7 +15,7 @@ export class Director {
   @Column()
   nationality: string;
 
-  @Column({ nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   profilePhotoKey: string | null;
 
   @OneToMany(() => Movie, (movie) => movie.director)

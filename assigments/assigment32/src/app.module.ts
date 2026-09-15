@@ -6,6 +6,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DirectorsModule } from './directors/directors.module';
 import { MoviesModule } from './movies/movies.module';
 import { AwsS3Module } from './aws-s3/aws-s3.module';
+import { AuthModule } from './auth/auth.module';
+import { EmailSenderModule } from './email-sender/email-sender.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -26,6 +29,9 @@ import { AwsS3Module } from './aws-s3/aws-s3.module';
     DirectorsModule,
     MoviesModule,
     AwsS3Module,
+    EmailSenderModule,
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

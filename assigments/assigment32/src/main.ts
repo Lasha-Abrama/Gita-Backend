@@ -20,15 +20,15 @@ async function bootstrap() {
     app,
     {
       openapi: '3.0.3',
-      info: { title: 'Movies and Directors API', version: '1.0.0' },
+      info: { title: 'Movies API with Authentication', version: '2.0.0' },
       paths: {},
     },
     {
       raw: false,
-      customSiteTitle: 'Movies and Directors API',
+      customSiteTitle: 'Movies API with Authentication',
       swaggerOptions: { url: '/swagger/swagger.yaml' },
     },
   );
   await app.listen(process.env.PORT ?? 3000);
 }
-bootstrap();
+void bootstrap();
